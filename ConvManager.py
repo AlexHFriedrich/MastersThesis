@@ -9,7 +9,7 @@ class ConvManager:
 
     def talk(self, prompt):
         self.conv_hist.append({"role": "user", "content": prompt})
-        response = ollama.chat({"model": self.model, "messages": self.conv_hist})
+        response = ollama.chat(model=self.model, messages=self.conv_hist, stream=False)
         self.conv_hist.append({"role": "bot", "content": response})
 
         return {"response": response}
