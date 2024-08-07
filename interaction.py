@@ -1,15 +1,20 @@
-import ollama
+from ollama import Client
 
-while True:
-    prompt = input("You: ")
 
-    if prompt == "q":
-        break
+def main():
+    client = Client(host='http://localhost:8000')
 
-    stream = ollama.chat(
-        model="llama3.1", messages=[{"role": "user", "content": prompt}],
-        stream=True,
-    )
+    while True:
+        user_input = input("You: ")
+        if user_input == "q":
+            break
+        response = client.chat(
+            model="llama3.1",
+            messages=[{"role": "user", "content": user_input}],
+            stream=False
+        )
+        print("Bot:", response['message']['content'])
 
-    for chunk in stream:
-        print(chunk['message']['content'], end='', flush=True)
+
+if __name__ == "__main__":
+    main()
