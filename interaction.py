@@ -16,7 +16,8 @@ def main():
         first_actor = ollama.chat(
             model="llama3.1",
             messages=session_state_second_instance,
-            stream=False
+            stream=False,
+            options={"num_predict": 50}
         )
         # print("First:", first_actor['message']['content'], "\n")
         session_state.append({"role": "user", "content": first_actor['message']['content']})
@@ -29,7 +30,8 @@ def main():
             possible_answers.append(ollama.chat(
                 model="llama3.1",
                 messages=session_state,
-                stream=False
+                stream=False,
+                options={"num_predict": 50}
             )['message']['content'])
 
         choice = 1
