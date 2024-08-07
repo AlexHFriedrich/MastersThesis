@@ -1,7 +1,9 @@
 import ollama
 
+
 def main():
-    session_state = []
+    session_state = [
+        {"role": "system", "content": "You are convinced that talking with a full mouth is the worst offense possible"}]
 
     while True:
         user_input = input("You: ")
@@ -16,7 +18,7 @@ def main():
         )
         print("Bot:", response['message']['content'])
 
-        session_state.append({"role": "bot", "content": response['message']['content']})
+        session_state.append({"role": "assistant", "content": response['message']['content']})
         print(session_state)
 
 
