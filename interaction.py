@@ -32,8 +32,6 @@ def main():
                 stream=False
             )['message']['content'])
 
-        for item in possible_answers:
-            print(item)
         choice = 1
         # here would be the RL agent choosing an optimal solution out of the sampled ones
 
@@ -43,6 +41,7 @@ def main():
         session_state.append({"role": "assistant", "content": second_actor})
         session_state_second_instance.append({"role": "assistant", "content": second_actor})
         run_times.append(time.time() - start)
+        print(run_times[-1])
 
     print(session_state)
     print(run_times)
