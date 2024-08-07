@@ -2,7 +2,7 @@ from ollama import Client
 
 
 def main():
-    client = Client(host='http://localhost:8000')
+    client = Client(host='http://localhost:11434')
 
     while True:
         user_input = input("You: ")
