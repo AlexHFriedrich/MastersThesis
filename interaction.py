@@ -10,7 +10,8 @@ def main():
     session_state_second_instance = [
         {"role": "system", "content": "You really like to talk while eating and like talking about it even more"}]
     run_times = []
-    while len(session_state) < 100:
+
+    while len(session_state) < 30:
         start = time.time()
         first_actor = ollama.chat(
             model="llama3.1",
@@ -29,10 +30,9 @@ def main():
 
         session_state.append({"role": "assistant", "content": second_actor['message']['content']})
         session_state_second_instance.append({"role": "user", "content": second_actor['message']['content']})
-        run_times.append(time.time() - start)
+        run_times.append((time.time() - start) / len(session_state[-1]) + len(session_state_second_instance[-2]))
 
     print(session_state)
-    print(run_times)
     print(sum(run_times) / len(run_times))
 
 
