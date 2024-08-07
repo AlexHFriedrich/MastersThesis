@@ -9,7 +9,7 @@ def main():
             break
 
         response = conv_manager.talk(user_input)
-        print("Bot:", response['message']['content'])
+        print("Bot:", response)
 
     convo_history = conv_manager.converse()
     print(json.loads(convo_history)['history'])
