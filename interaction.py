@@ -20,18 +20,24 @@ def main():
         )
         # print("First:", first_actor['message']['content'], "\n")
         session_state.append({"role": "user", "content": first_actor['message']['content']})
-        session_state_second_instance.append({"role": "assistant", "content": first_actor['message']['content']})
-        second_actor = ollama.chat(
-            model="llama3.1",
-            messages=session_state,
-            stream=False
-        )
+        session_state_second_instance.append({"role": "user", "content": first_actor['message']['content']})
+        possible_answers = []
+        while len(possible_answers) < 5:
+            possible_answers.append(ollama.chat(
+                model="llama3.1",
+                messages=session_state,
+                stream=False
+            )['message']['content'])
+
+        for item in possible_answers:
+            print(item)
+        choice = 1
+        second_actor = possible_answers[choice]
         # print("Second:", second_actor['message']['content'], "\n")
 
-        session_state.append({"role": "assistant", "content": second_actor['message']['content']})
-        session_state_second_instance.append({"role": "user", "content": second_actor['message']['content']})
-        run_times.append((time.time() - start) / (len(session_state[-1]["content"]) + len(
-            session_state_second_instance[-2]["content"])))
+        session_state.append({"role": "assistant", "content": second_actor})
+        session_state_second_instance.append({"role": "assistant", "content": second_actor})
+        run_times.append(time.time() - start)
 
     print(session_state)
     print(run_times)
