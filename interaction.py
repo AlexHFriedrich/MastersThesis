@@ -2,7 +2,7 @@ from ollama import Client
 
 
 def main():
-    client = Client(host='http://localhost:11434')
+    client = Client(host='http://localhost:11434', websocket=True)
 
     while True:
         user_input = input("You: ")
