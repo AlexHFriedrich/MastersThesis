@@ -1,23 +1,18 @@
-import ollama
+import json
+from ConvManager import ConvManager
 
 def main():
-    session_state = []
-
+    conv_manager = ConvManager()
     while True:
         user_input = input("You: ")
         if user_input == "q":
             break
 
-        session_state.append({"role": "user", "content": user_input})
-        response = ollama.chat(
-            model="llama3.1",
-            messages=session_state,
-            stream=False
-        )
+        response = conv_manager.talk(user_input)
         print("Bot:", response['message']['content'])
 
-        session_state.append({"role": "bot", "content": response['message']['content']})
-
+    convo_history = conv_manager.converse()
+    print(json.loads(convo_history)['history'])
 
 if __name__ == "__main__":
     main()
