@@ -1,6 +1,7 @@
 import json
 from ConvManager import ConvManager
 
+
 def main():
     conv_manager = ConvManager()
     while True:
@@ -11,8 +12,8 @@ def main():
         response = conv_manager.talk(user_input)
         print("Bot:", response)
 
-    convo_history = conv_manager.converse()
-    print(json.loads(convo_history)['history'])
+    print(conv_manager.conv_hist)
+
 
 if __name__ == "__main__":
     main()

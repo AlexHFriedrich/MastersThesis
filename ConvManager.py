@@ -10,10 +10,6 @@ class ConvManager:
     def talk(self, prompt):
         self.conv_hist.append({"role": "user", "content": prompt})
         response = ollama.chat(model=self.model, messages=self.conv_hist, stream=False)
-        self.conv_hist.append({"role": "bot", "content": response})
+        self.conv_hist.append({"role": "assistant", "content": response})
 
         return {"response": response}
-
-    def converse(self):
-        convo = {"history": self.conv_hist}
-        return json.dumps(convo)
