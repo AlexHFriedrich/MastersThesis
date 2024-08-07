@@ -1,19 +1,22 @@
-from ollama import Client
-
+import ollama
 
 def main():
-    client = Client(host='http://localhost:11434', websocket=True)
+    session_state = []
 
     while True:
         user_input = input("You: ")
         if user_input == "q":
             break
-        response = client.chat(
+
+        session_state.append({"role": "user", "content": user_input})
+        response = ollama.chat(
             model="llama3.1",
-            messages=[{"role": "user", "content": user_input}],
+            messages=session_state,
             stream=False
         )
         print("Bot:", response['message']['content'])
+
+        session_state.append({"role": "bot", "content": response['message']['content']})
 
 
 if __name__ == "__main__":
