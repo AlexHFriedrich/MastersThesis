@@ -30,9 +30,11 @@ def main():
 
         session_state.append({"role": "assistant", "content": second_actor['message']['content']})
         session_state_second_instance.append({"role": "user", "content": second_actor['message']['content']})
-        run_times.append((time.time() - start) / len(session_state[-1]) + len(session_state_second_instance[-2]))
+        run_times.append((time.time() - start) / len(session_state[-1]["content"]) + len(
+            session_state_second_instance[-2]["content"]))
 
     print(session_state)
+    print(run_times)
     print(sum(run_times) / len(run_times))
 
 
