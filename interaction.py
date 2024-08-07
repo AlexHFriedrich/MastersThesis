@@ -5,7 +5,8 @@ def main():
     session_state = [
         {"role": "system", "content": "You are convinced that talking with a full mouth is the worst offense possible"}]
 
-    session_state_second_instance = [{"role": "system", "content": "You really like to talk while eating"}]
+    session_state_second_instance = [
+        {"role": "system", "content": "You really like to talk while eating and like talking about it even more"}]
     while len(session_state) < 10:
         first_actor = ollama.chat(
             model="llama3.1",
@@ -14,6 +15,7 @@ def main():
         )
         print("First:", first_actor['message']['content'])
         session_state.append({"role": "user", "content": first_actor['message']['content']})
+        session_state_second_instance.append({"role": "assistant", "content": first_actor['message']['content']})
         second_actor = ollama.chat(
             model="llama3.1",
             messages=session_state,
@@ -22,6 +24,7 @@ def main():
         print("Second:", second_actor['message']['content'])
 
         session_state.append({"role": "assistant", "content": second_actor['message']['content']})
+        session_state_second_instance.append({"role": "user", "content": second_actor['message']['content']})
 
     print(session_state)
 
