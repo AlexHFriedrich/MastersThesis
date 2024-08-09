@@ -1,7 +1,6 @@
 import time
 import ollama
 
-from Fine_tuning_BERT import zero_shot_test
 
 
 def main():
