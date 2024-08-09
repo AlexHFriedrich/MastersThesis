@@ -1,7 +1,20 @@
 import time
 import ollama
-
+import matplotlib.pyplot as plt
 from SentimentAnalysis import load_model, call_model
+
+
+def plot_results(sentiments, sentiment_labels, times):
+    # plot the sentiments as line plots in a single figure, one line per sentiment
+    plt.figure()
+    for i in range(len(sentiments[0])):
+        plt.plot([sent[i] for sent in sentiments], label=sentiment_labels[i])
+    plt.legend()
+    plt.savefig("sentiments.png")
+    # plot the times as a histogram
+    plt.figure()
+    plt.plot(times)
+    plt.savefig("times.png")
 
 
 def main():
@@ -15,7 +28,8 @@ def main():
 
     model = load_model()
     sentiments = []
-
+    sentiment_labels = ["afraid", "confident", "excited", "neutral"]
+    times = []
     while len(session_state) < 50:
         start = time.time()
         first_actor = ollama.chat(
@@ -27,9 +41,10 @@ def main():
         if len(first_actor['message']['content']) > 0:
             # print("First:", first_actor['message']['content'], "\n")
             # here the SA model would be called to determine the sentiment of the first actor output
-            sentiment = call_model(model, first_actor['message']['content'], ["afraid", "confident", "excited", "neutral"])
+            sentiment = call_model(model, first_actor['message']['content'], sentiment_labels)
             print("Sentiment Value:", sentiment)
-            sentiments.append([sentiment["labels"], sentiment["scores"]])
+
+            sentiments.append(sentiment["scores"])
         # print("First:", first_actor['message']['content'], "\n")
         session_state.append({"role": "user", "content": first_actor['message']['content']})
         session_state_second_instance.append({"role": "user", "content": first_actor['message']['content']})
@@ -44,8 +59,7 @@ def main():
         session_state.append({"role": "assistant", "content": second_actor['message']['content']})
         session_state_second_instance.append({"role": "assistant", "content": second_actor['message']['content']})
 
-        print(time.time() - start)
-    print(sentiments)
+        times.append(time.time() - start)
 
 
 if __name__ == "__main__":
