@@ -2,7 +2,7 @@ from transformers import pipeline
 
 
 def load_model(path):
-    model = pipeline(model=path)
+    model = pipeline("sentiment-analysis", model=path)
     return model
 
 
