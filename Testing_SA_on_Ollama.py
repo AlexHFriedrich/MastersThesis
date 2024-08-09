@@ -31,7 +31,7 @@ def main():
     sentiments = []
     sentiment_labels = ["afraid", "confident", "excited", "neutral"]
     times = []
-    for i in trange(50):
+    for _ in trange(5):
         start = time.time()
         first_actor = ollama.chat(
             model="llama3.1",
