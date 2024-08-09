@@ -2,6 +2,7 @@ import time
 import ollama
 import matplotlib.pyplot as plt
 from SentimentAnalysis import load_model, call_model
+from tqdm import trange
 
 
 def plot_results(sentiments, sentiment_labels, times):
@@ -30,7 +31,7 @@ def main():
     sentiments = []
     sentiment_labels = ["afraid", "confident", "excited", "neutral"]
     times = []
-    while len(session_state) < 50:
+    for i in trange(50):
         start = time.time()
         first_actor = ollama.chat(
             model="llama3.1",
