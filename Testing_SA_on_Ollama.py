@@ -22,7 +22,7 @@ def main():
             options={"num_predict": 50}
         )
         if len(first_actor['message']['content']) > 0:
-            print("First:", first_actor['message']['content'], "\n")
+            # print("First:", first_actor['message']['content'], "\n")
             # here the SA model would be called to determine the sentiment of the first actor output
             sentiment = call_model(model, tokenizer, first_actor['message']['content'])
             print("Sentiment Value:", sentiment)
