@@ -9,7 +9,8 @@ def main():
         {"role": "system", "content": "You are convinced that talking with a full mouth is the worst offense possible"}]
 
     session_state_second_instance = [
-        {"role": "system", "content": "You really like to talk while eating and like talking about it even more"}]
+        {"role": "system", "content": "You really like to talk while eating and like talking about it even more"},
+        {"role": "user", "content": "Are you talking while eating?"}]
 
     model, tokenizer = load_model("ft_bert_emotion")
 
