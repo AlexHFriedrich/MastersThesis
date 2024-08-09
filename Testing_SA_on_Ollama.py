@@ -11,7 +11,7 @@ def main():
     session_state_second_instance = [
         {"role": "system", "content": "You really like to talk while eating and like talking about it even more"}]
 
-    model, tokenizer = load_model("ft_bert_emotion")
+    model = load_model()
 
     while len(session_state) < 10:
         start = time.time()

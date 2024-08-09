@@ -1,8 +1,8 @@
 from transformers import pipeline
 
 
-def load_model(path):
-    model = pipeline("sentiment-analysis", model=path)
+def load_model():
+    model = pipeline("sentiment-analysis")
     return model
 
 
