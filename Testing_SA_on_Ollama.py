@@ -21,7 +21,7 @@ def main():
             options={"num_predict": 50}
         )
         print("First:", first_actor['message']['content'], "\n")
-        zero_shot_test(first_actor['message']['content'], ["positive", "negative"], aspect='intent')
+        # here the SA model would be called to determine the sentiment of the first actor output
 
         # print("First:", first_actor['message']['content'], "\n")
         session_state.append({"role": "user", "content": first_actor['message']['content']})
