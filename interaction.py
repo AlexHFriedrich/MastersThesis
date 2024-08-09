@@ -1,7 +1,7 @@
 import time
 import ollama
 
-from SentimentAnalysis import zero_shot_test
+from Fine_tuning_BERT import zero_shot_test
 
 
 def main():
