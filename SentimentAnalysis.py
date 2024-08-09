@@ -17,11 +17,6 @@ from transformers import (
 )
 
 
-def _setup():
-    device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-    os.environ['TOKENIZERS_PARALLELISM'] = 'false'
-
-
 def _load_data():
     emotion_dataset = load_dataset('dair-ai/emotion')
 
@@ -76,7 +71,6 @@ def _training(model, tokenized_dataset, tokenizer):
         save_strategy='epoch',
         save_total_limit=1,
         seed=42,
-        data_seed=42,
         fp16=True,
         dataloader_num_workers=2,
         load_best_model_at_end=True,
@@ -137,7 +131,9 @@ def _eval(trainer, tokenized_dataset):
 
 
 def main():
-    _setup()
+    device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+    os.environ['TOKENIZERS_PARALLELISM'] = 'false'
+    print(f'Using device: {device}')
     tokenized_dataset, idx2lbl, lbl2idx = _load_data()
     model = _load_model(idx2lbl, lbl2idx)
     trainer = _training(model, tokenized_dataset, _get_tokenizer())
