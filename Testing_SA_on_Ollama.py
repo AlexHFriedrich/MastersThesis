@@ -37,8 +37,8 @@ def main():
             options={"num_predict": 50}
         )
 
-        session_state.append({"role": "assistant", "content": second_actor})
-        session_state_second_instance.append({"role": "assistant", "content": second_actor})
+        session_state.append({"role": "assistant", "content": second_actor['message']['content']})
+        session_state_second_instance.append({"role": "assistant", "content": second_actor['message']['content']})
 
         print(time.time() - start)
 
