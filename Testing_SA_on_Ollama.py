@@ -62,6 +62,7 @@ def main():
 
         times.append(time.time() - start)
     plot_results(sentiments, sentiment_labels, times)
+    print(len(sentiments))
 
 
 if __name__ == "__main__":
