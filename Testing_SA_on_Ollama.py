@@ -27,7 +27,7 @@ def main():
         if len(first_actor['message']['content']) > 0:
             # print("First:", first_actor['message']['content'], "\n")
             # here the SA model would be called to determine the sentiment of the first actor output
-            sentiment = call_model(model, first_actor['message']['content'], ["positive", "negative"])
+            sentiment = call_model(model, first_actor['message']['content'], ["afraid", "confident", "excited", "neutral"])
             print("Sentiment Value:", sentiment)
             sentiments.append(sentiment)
         # print("First:", first_actor['message']['content'], "\n")
