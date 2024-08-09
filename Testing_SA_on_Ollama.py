@@ -40,3 +40,7 @@ def main():
         session_state_second_instance.append({"role": "assistant", "content": second_actor})
 
         print(time.time() - start)
+
+
+if __name__ == "__main__":
+    main()
