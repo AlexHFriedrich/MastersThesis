@@ -42,7 +42,7 @@ def main():
             # print("First:", first_actor['message']['content'], "\n")
             # here the SA model would be called to determine the sentiment of the first actor output
             sentiment = call_model(model, first_actor['message']['content'], sentiment_labels)
-            print("Sentiment Value:", sentiment)
+            # print("Sentiment Value:", sentiment)
 
             sentiments.append(sentiment["scores"])
         # print("First:", first_actor['message']['content'], "\n")
@@ -60,6 +60,7 @@ def main():
         session_state_second_instance.append({"role": "assistant", "content": second_actor['message']['content']})
 
         times.append(time.time() - start)
+    plot_results(sentiments, sentiment_labels, times)
 
 
 if __name__ == "__main__":
