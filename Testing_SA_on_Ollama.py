@@ -29,7 +29,7 @@ def main():
             # here the SA model would be called to determine the sentiment of the first actor output
             sentiment = call_model(model, first_actor['message']['content'], ["afraid", "confident", "excited", "neutral"])
             print("Sentiment Value:", sentiment)
-            sentiments.append(sentiment)
+            sentiments.append([sentiment["labels"], sentiment["scores"]])
         # print("First:", first_actor['message']['content'], "\n")
         session_state.append({"role": "user", "content": first_actor['message']['content']})
         session_state_second_instance.append({"role": "user", "content": first_actor['message']['content']})
