@@ -41,9 +41,6 @@ def main():
         )
 
         # print("First:", first_actor['message']['content'], "\n")
-
-        sentiments.append(sentiment["scores"])
-        # print("First:", first_actor['message']['content'], "\n")
         session_state.append({"role": "user", "content": first_actor['message']['content']})
         session_state_second_instance.append({"role": "user", "content": first_actor['message']['content']})
 
@@ -56,6 +53,8 @@ def main():
 
         # here the SA model would be called to determine the sentiment of the first actor output
         sentiment = call_model(model, second_actor['message']['content'], sentiment_labels)
+
+        sentiments.append(sentiment["scores"])
         # print("Sentiment Value:", sentiment)
 
         session_state.append({"role": "assistant", "content": second_actor['message']['content']})
