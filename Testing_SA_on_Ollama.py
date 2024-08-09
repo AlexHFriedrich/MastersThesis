@@ -39,13 +39,10 @@ def main():
             stream=False,
             options={"num_predict": 100}
         )
-        if len(first_actor['message']['content']) > 0:
-            # print("First:", first_actor['message']['content'], "\n")
-            # here the SA model would be called to determine the sentiment of the first actor output
-            sentiment = call_model(model, first_actor['message']['content'], sentiment_labels)
-            # print("Sentiment Value:", sentiment)
 
-            sentiments.append(sentiment["scores"])
+        # print("First:", first_actor['message']['content'], "\n")
+
+        sentiments.append(sentiment["scores"])
         # print("First:", first_actor['message']['content'], "\n")
         session_state.append({"role": "user", "content": first_actor['message']['content']})
         session_state_second_instance.append({"role": "user", "content": first_actor['message']['content']})
@@ -56,6 +53,10 @@ def main():
             stream=False,
             options={"num_predict": 100}
         )
+
+        # here the SA model would be called to determine the sentiment of the first actor output
+        sentiment = call_model(model, second_actor['message']['content'], sentiment_labels)
+        # print("Sentiment Value:", sentiment)
 
         session_state.append({"role": "assistant", "content": second_actor['message']['content']})
         session_state_second_instance.append({"role": "assistant", "content": second_actor['message']['content']})
