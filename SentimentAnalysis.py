@@ -19,4 +19,4 @@ def tokenize(tokenizer, text):
 def call_model(model, tokenizer, text):
     tokenized_text = tokenize(tokenizer, text)
     print(tokenized_text)
-    return model(tokenized_text)
+    return model(tokenized_text["input_ids"], tokenized_text["attention_mask"], tokenized_text["token_type_ids"])
